@@ -1,41 +1,370 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spring Boot Portfolio</title>
+    <title>금고(Gum-Go) - 프리미엄 귀금속 거래소</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f6f9;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        :root {
+            --gold-primary: #D4AF37;
+            --gold-light: #F3E5AB;
+            --gold-dark: #996515;
+            --bg-color: #ffffff;
+            --text-dark: #222222;
+            --text-gray: #666666;
+            --header-border: #eaeaea;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Utility Bar */
+        .top-utils {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid var(--header-border);
+            padding: 8px 0;
+            font-size: 12px;
+            color: var(--text-gray);
+        }
+
+        .top-utils .inner {
+            width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+
+        .top-utils a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .top-utils a:hover {
+            color: var(--gold-dark);
+        }
+
+        /* Header Navigation */
+        .header {
+            width: 100%;
+            background: white;
+            border-bottom: 2px solid var(--gold-primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header .inner {
+            width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 90px;
+        }
+
+        .logo {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--gold-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .gnb {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .gnb a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 10px 0;
+        }
+
+        .gnb a:hover {
+            color: var(--gold-primary);
+            border-bottom: 2px solid var(--gold-primary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-dark);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--gold-light);
+        }
+
+        .btn-solid {
+            background: var(--gold-primary);
+            color: white;
+            border: 1px solid var(--gold-primary);
+        }
+
+        .btn-solid:hover {
+            background: var(--gold-dark);
+        }
+
+        /* Main Hero Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1599643478524-fb66f70d00ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
         }
 
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .hero-content {
+            color: white;
         }
 
-        h1 {
-            color: #007bff;
+        .hero h2 {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 18px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* Quick Menu Section */
+        .quick-menu-wrapper {
+            background: white;
+            padding: 60px 0;
+            border-bottom: 1px solid var(--header-border);
+        }
+
+        .quick-menu {
+            width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .quick-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 28px;
+            color: var(--text-dark);
+            margin-bottom: 40px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .menu-item {
+            padding: 30px 20px;
+            background: #fff;
+            border: 1px solid var(--header-border);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            border-color: var(--gold-primary);
+        }
+
+        .menu-icon {
+            width: 60px;
+            height: 60px;
+            background: #fdfbf7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 24px;
+            color: var(--gold-dark);
+            border: 1px solid var(--gold-light);
+        }
+
+        .menu-item h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .menu-item p {
+            font-size: 13px;
+            color: var(--text-gray);
+        }
+
+        /* Footer */
+        .footer {
+            background: #f8f9fa;
+            padding: 40px 0;
+            margin-top: auto;
+            border-top: 1px solid var(--header-border);
+        }
+
+        .footer .inner {
+            width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer-info p {
+            font-size: 13px;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        .footer-logo {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 24px;
+            color: #999;
+            margin-bottom: 15px;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1 th:text="${message}">Default Welcome Message</h1>
-        <p>This page is rendered using Thymeleaf on Spring Boot.</p>
-    </div>
+
+    <!-- 메인 헤더  -->
+    <header class="header">
+        <div class="inner">
+            <a href="/" class="logo">
+                <div class="logo-icon">金</div>
+                금고
+            </a>
+
+            <ul class="gnb">
+                <li><a href="#">시세조회</a></li>
+                <li><a href="#">골드뱅킹</a></li>
+                <li><a href="#">예물/주얼리</a></li>
+                <li><a href="#">매입/감정</a></li>
+                <li><a href="#">자산관리</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <a href="/signup" class="btn btn-outline">회원가입</a>
+                <a href="/login" class="btn btn-solid">로그인</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 히로 배너 영역 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>변하지 않는 가치, 금고</h2>
+            <p>고객님의 자산 가치를 최우선으로 생각하는 프리미엄 귀금속 거래소입니다.</p>
+            <a href="/login" class="btn btn-solid" style="padding: 15px 40px; font-size: 16px;">안전거래 시작하기</a>
+        </div>
+    </section>
+
+    <!-- 빠른 메뉴 -->
+    <section class="quick-menu-wrapper">
+        <div class="quick-menu">
+            <h2 class="quick-title">자주 찾는 서비스</h2>
+            <div class="menu-grid">
+                <a href="#" class="menu-item">
+                    <div class="menu-icon">📈</div>
+                    <h3>실시간 시세</h3>
+                    <p>국내/국제 금, 은 시세 조회</p>
+                </a>
+                <a href="#" class="menu-item">
+                    <div class="menu-icon">💍</div>
+                    <h3>예물 상담</h3>
+                    <p>프리미엄 웨딩 주얼리 예약</p>
+                </a>
+                <a href="#" class="menu-item">
+                    <div class="menu-icon">⚖️</div>
+                    <h3>매입/감정</h3>
+                    <p>투명하고 정직한 감정 서비스</p>
+                </a>
+                <a href="#" class="menu-item">
+                    <div class="menu-icon">🏦</div>
+                    <h3>골드뱅킹</h3>
+                    <p>금고 전용 자산 보관 서비스</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 하단 푸터 -->
+    <footer class="footer">
+        <div class="inner">
+            <div class="footer-info">
+                <div class="footer-logo">금고 (Gum-Go)</div>
+                <p>
+                    서울특별시 종로구 종로 3가 | 대표번호: 0000-0000<br>
+                    사업자등록번호: 123-45-78910 | 통신판매업신고: 제2025-서울종로-0000호<br>
+                    COPYRIGHTS GEUMHO JEWELRY. ALL RIGHTS RESERVED.
+                </p>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
