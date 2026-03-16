@@ -1,4 +1,4 @@
-Spring Boot Portfolio Server
+Spring Boot Server
 ============================
 
 본 프로젝트는 spring boot 웹 서비스 연습 예제 입니다.
