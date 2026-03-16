@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: server
+  
+  # PostgreSQL Configuration
+  datasource:
+    url: jdbc:postgresql://postgres:5432/mydatabase
+    username: root
+    password: password
+    driver-class-name: org.postgresql.Driver
+    
+  # JPA Configuration
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
